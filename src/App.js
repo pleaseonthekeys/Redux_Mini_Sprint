@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+class App extends Component {
+  render() {
+    console.log(">>> The state is >>> ", {
+      current: this.props.current,
+      students: this.props.students
+    });
+    return (
+      <div className="App">
+        <span>
+          Current student is : <b>{this.props.current.name}</b>
+        </span>
+        <br />
+        <span>
+          {this.props.current.name}'s favorite song is :
+          <b>{this.props.current.favorite}</b>
+        </span>
+        <br />
+        <ul>
+          {this.props.students.list.map(student => {
+            return (
+              <li>
+                <span>Student Name:{student.name}</span>
+                <br />
+                <span>
+                  {student.name}'s favorite song is :{student.favorite}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = function(storeState) {
+  return storeState;
+};
+
+//The connect function makes the state returned from
+//the mapStateToProps function available to the App component as props
+export default connect(mapStateToProps)(App);
