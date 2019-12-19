@@ -5,10 +5,10 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    console.log(">>> The state is >>> ", {
-      current: this.props.current,
-      students: this.props.students
-    });
+    // console.log(">>> The state is >>> ", {
+    //   current: this.props.current,
+    //   students: this.props.students
+    // });
     return (
       <div className="App">
         <span>
@@ -24,11 +24,24 @@ class App extends Component {
           {this.props.students.list.map(student => {
             return (
               <li>
-                <span>Student Name:{student.name}</span>
+                <span>Student Name: {student.name}</span>
                 <br />
                 <span>
-                  {student.name}'s favorite song is :{student.favorite}
+                  {student.name}'s favorite song is: {student.favorite}
                 </span>
+              </li>
+            );
+          })}
+        </ul>
+        <br />
+        <h2>PlayList: </h2>
+        <ul>
+          {this.props.playList.playList.map(song => {
+            return (
+              <li>
+                <span>Artist Name: {song.artist}</span>
+                <br />
+                <span>Song Title: {song.songTitle}</span>
               </li>
             );
           })}

@@ -36,7 +36,7 @@ const currentStudentReducer = function(
 //action types are available to all reducers so that they can all be handled as needed, which is why we need a switch statement
 //what do you see when you log action.type in this econd reducer?
 
-const studentsReducer = function(previousState = {}, action) {
+const studentsReducer = function(previousState = { list: [] }, action) {
   // console.log(">>> ACTION OF Type >>> stud " + action.type);
   //console.log(">>> ACTION's PAYLOAD IS >>> stud ", action.payload);
   switch (action.type) {
@@ -51,12 +51,11 @@ const studentsReducer = function(previousState = {}, action) {
 };
 
 //write a playlist reducer
-const playListReducer = function(previousState = {}, action) {
+const playListReducer = function(previousState = { playList: [] }, action) {
   switch (action.type) {
     case "ADD_TO_GROUP_PLAYLIST":
       return {
-        artistName: action.payload.artist,
-        songTitle: action.payload.songTitle
+        playList: [...previousState.playList, action.payload]
       };
     default:
       return previousState;
