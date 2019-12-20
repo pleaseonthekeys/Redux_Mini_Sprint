@@ -12,7 +12,7 @@ const playListActionCreator = ({ artist, songTitle }) => ({
 const defaultCurrentStudentAppState = { name: "", favorite: "" };
 
 const currentStudentReducer = function(
-  previousState = defaultAppState,
+  previousState = defaultCurrentStudentAppState,
   action
 ) {
   // console.log(">>> ACTION OF Type >>> currentStudent " + action.type);
