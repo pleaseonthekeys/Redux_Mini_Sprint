@@ -1,8 +1,5 @@
 import { createStore, combineReducers } from "redux";
 
-//action creators can be used in multiple reducers and
-//individual reducers can handle multiple action creators
-
 const studentActionCreator = ({ name, favorite }) => ({
   type: "ADD_STUDENT",
   payload: { name, favorite }
@@ -13,12 +10,8 @@ const playListActionCreator = ({ artist, songTitle }) => ({
   payload: { artist, songTitle }
 });
 
-//why do you think creating a default state is good practice?
 const defaultAppState = { name: "", favorite: "" };
 
-//what do you expect to see when you log action.type?
-//how about action.payload?
-//make your predictions then uncomment the console.log to find out
 const currentStudentReducer = function(
   previousState = defaultAppState,
   action
@@ -32,9 +25,6 @@ const currentStudentReducer = function(
       return previousState;
   }
 };
-
-//action types are available to all reducers so that they can all be handled as needed, which is why we need a switch statement
-//what do you see when you log action.type in this econd reducer?
 
 const studentsReducer = function(previousState = { list: [] }, action) {
   // console.log(">>> ACTION OF Type >>> stud " + action.type);
@@ -50,75 +40,86 @@ const studentsReducer = function(previousState = { list: [] }, action) {
   }
 };
 
-//write a playlist reducer
-const playListReducer = function(previousState = { playList: [] }, action) {
+const playListReducer = function(previousState = [], action) {
   switch (action.type) {
     case "ADD_TO_GROUP_PLAYLIST":
-      return {
-        playList: [...previousState.playList, action.payload]
-      };
+      return [...previousState, action.payload];
     default:
       return previousState;
   }
 };
 
-//add the playListReducer to the rootReducer
 const rootReducer = combineReducers({
   current: currentStudentReducer,
   students: studentsReducer,
   playList: playListReducer
 });
 
-// store.getState();
-// store.dispatch(actionCreator("arg"));
-// store.getState();
-
 const storeInitialState = {
   current: { name: "", favorite: "" },
   students: {
     list: [],
     total: 0
-  }
+  },
+  playList: []
 };
 
 const store = createStore(rootReducer, storeInitialState);
 window.__store = store;
 
-//to add items to the store in the browser, write the statement below in the brower's console:
-//let store = window.__store
-//then dispatch your action creators in the console as an argument inside dispatch like so:
-/*store.dispatch({
+/* 
+To add items to the store in the browser, write the statement below in the brower's console:
+let store = window.__store
+then dispatch your action creators in the console as an argument inside dispatch like so:
+store.dispatch({
   type: "ADD_STUDENT",
-  payload: { name: "Brittany", favorite: "Hit Me Baby One More Time" }
-}) */
+  payload: { name: "Michael", favorite: "Hit Me Baby One More Time" }
+})
 
-//NOT like so:
-/*store.dispatch(studentActionCreator({ name: "Lauren2", favorite: "Stay with Me" })*/
+NOT like so:
+store.dispatch(studentActionCreator({ name: "Michael", favorite: "Hit Me Baby One More Time" })
 
-//first dispatch but because are not handling...returns previous
+*/
+console.log(
+  "Current State before dispatching actions with action creator >>>",
+  store.getState()
+);
+/* In currentStudentReducer, comment out the "case" after the switch statement 
+as well as the return statement right below the case.
+call the dispatch function below. 
+Because we are not handling the action type, note that the previous state is returned.
+Now let's handle that action by uncommenting the case and return statement. Note the new current state. */
 store.dispatch(
-  studentActionCreator({ name: "Lauren", favorite: "Stay with Me" })
+  studentActionCreator({
+    name: "Lauren",
+    favorite: "You Can Get It If You Really Want"
+  })
 );
 
 store.dispatch(
   studentActionCreator({
-    name: "Brittany",
-    favorite: "Hit Me Baby One More Time"
+    name: "Trevor",
+    favorite: "I Want You Back"
   })
 );
 
 store.dispatch(
   playListActionCreator({
-    artist: "Hello",
-    songTitle: "Whats up??"
+    artist: "Jimmy Cliff",
+    songTitle: "You Can Get It If You Really Want"
   })
 );
 
-// store.dispatch();
-// store.dispatch({ type: "CHANGE_STUDENT_NAME" });
-// store.dispatch({ type: "CHANGE_STUDENT_FAVORITE_SONG" });
-//now try to handle that action
-//once you write (or uncomment) the case and return, we are now handling the action
-console.log("This is the current State >>>", store.getState());
+store.dispatch(
+  playListActionCreator({
+    artist: "Jackson 5",
+    songTitle: "I Want You Back"
+  })
+);
+
+console.log(
+  "Current state after dispatching action with action creator >>>",
+  store.getState()
+);
 
 export default store;

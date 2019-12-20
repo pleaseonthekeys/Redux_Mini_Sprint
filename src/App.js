@@ -21,6 +21,7 @@ class App extends Component {
           <b>{this.props.current.favorite}</b>
         </span>
         <br />
+        <h2>Student Favorites: </h2>
         <ul>
           {this.props.students.list.map(student => {
             return (
@@ -37,7 +38,7 @@ class App extends Component {
         <br />
         <h2>PlayList: </h2>
         <ul>
-          {this.props.playList.playList.map(song => {
+          {this.props.playList.map(song => {
             return (
               <li key={uuid()}>
                 <span>Artist Name: {song.artist}</span>
