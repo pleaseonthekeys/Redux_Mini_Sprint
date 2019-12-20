@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Redux Mini Sprint
 
-## Available Scripts
+This sprint is intended to familiraze yourself with the Redux workflow before modularization and before connecting it with React in Recast.ly-Redux
 
-In the project directory, you can run:
+navigate to ./src/store.js
 
-### `yarn start`
+All of your work can be done in this file; however, it will also be useful to explore App.js and index.js to see how React and Redux connect with one another.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Actions and Action Creators
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Actions are objects that must always have a type property and will often have a payload property containing data. Action creators can be synchronous or asynchronous functions that eventually deliver the data to the store. Our application will contain 2 action creators which will eventually result in 3 unique sets of data in our store.
 
-### `yarn test`
+Start by filling in a type for the first provided "studentActionCreator". Types are always strings and the naming convention is to use "ALL_CAPS_SEPARATED_BY_UNDERSCORES".
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Write a second action creator, playListActionCreator, which will return an object with an artist and songTitle property.
 
-### `yarn build`
+### Reducers
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Under the hood, reducers receive the action objects delivered by action creators as an argument; however, you will not directly provide this argument. Redux will take care of this and we will write the function to handle the incoming objects.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Action types are available to all reducers so that they can all be handled as needed, which is why we need a switch statement.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Write a playListReducer so that it returns an array containing all song objects created by the playList action creator.
 
-### `yarn eject`
+### Root Reducer
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Add the studentsReducer with property name 'students' and playListReducer with property name 'playList' to the rootReducer. Notice that the function 'combineReducers' is imported from redux.
+The properties of the object argument inside this function directly reflect the properties maintained in your store (an object that holds the somplete state of our application). At this point, we still have not shipped any data to our store or even created our actual store. We have only set up our Redux flow to ship data to the store.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Store
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The createStore function is imported from Redux. For our purposes createStore takes two arguments:
+our root reducer and a preloaded, initial state.

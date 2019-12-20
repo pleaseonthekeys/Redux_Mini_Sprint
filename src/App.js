@@ -36,7 +36,7 @@ class App extends Component {
         <br />
         <h2>PlayList: </h2>
         <ul>
-          {this.props.playList.playList.map(song => {
+          {this.props.playList.map(song => {
             return (
               <li>
                 <span>Artist Name: {song.artist}</span>
