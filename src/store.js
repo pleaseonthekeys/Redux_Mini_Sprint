@@ -25,8 +25,7 @@ const currentStudentReducer = function(
   }
 };
 
-const defaultStudentsAppState = {list: []}
-//what do you see when you log action.type in this second reducer?
+const defaultStudentsAppState = {list: [], total: 0}
 const studentsReducer = function(previousState = defaultStudentsAppState, action) {
   // console.log(">>> ACTION OF Type >>> students " + action.type);
   //console.log(">>> ACTION's PAYLOAD IS >>> stududents ", action.payload);
@@ -50,8 +49,6 @@ const rootReducer = combineReducers({
   //add the rest of the reducers
 });
 
-
-//what is the purpose of creating an initial state for the store?
 const storeInitialState = {
   current: { name: "", favorite: "" },
   students: {
@@ -78,7 +75,7 @@ store.dispatch(studentActionCreator({ name: "Michael", favorite: "Hit Me Baby On
 
 */
 
-console.log("This is the current State before dispatching any actions with the action creator >>>", store.getState());
+console.log("Current State before dispatching actions with action creator >>>", store.getState());
 
 /* In currentStudentReducer, comment out the "case" after the switch statement 
 as well as the return statement right below the case.
@@ -90,28 +87,12 @@ store.dispatch(
   studentActionCreator({ name: "Lauren", favorite: "Carry On" })
   );
   
-  console.log("This is the current State after dispatching the action with the action creator >>>", store.getState());
-
-
-  // store.dispatch(
-  //   studentActionCreator({
-  //     name: "Brittany",
-  //     favorite: "Hit Me Baby One More Time"
-  //   })
-  //   );
-    
-    // store.dispatch(
-    //   playListActionCreator({
-    //     artist: "Hello",
-    //     songTitle: "Whats up??"
-    //   })
-    //   );
-      
-      //now try to handle that action
-      //once you write (or uncomment) the case and return, we are now handling the action
-      
-      // store.getState();
-      // store.dispatch(actionCreator("arg"));
-      // store.getState();
-
+  console.log("Current state after dispatching action with action creator >>>", store.getState());
+  
+  
+  store.dispatch(/* dispatch more studentActionCreators */);
+  store.dispatch(/* dispatch playListActionCreators */);
+  
+  console.log("Current state after dispatching action with action creator >>>", store.getState());
+  
 export default store;
