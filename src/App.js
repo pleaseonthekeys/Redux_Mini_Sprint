@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { uuid } from "uuidv4";
 
 import "./App.css";
 
@@ -23,7 +24,7 @@ class App extends Component {
         <ul>
           {this.props.students.list.map(student => {
             return (
-              <li>
+              <li key={uuid()}>
                 <span>Student Name: {student.name}</span>
                 <br />
                 <span>
@@ -38,7 +39,7 @@ class App extends Component {
         <ul>
           {this.props.playList.playList.map(song => {
             return (
-              <li>
+              <li key={uuid()}>
                 <span>Artist Name: {song.artist}</span>
                 <br />
                 <span>Song Title: {song.songTitle}</span>
@@ -55,6 +56,6 @@ const mapStateToProps = function(storeState) {
   return storeState;
 };
 
-//The connect function makes the state returned from
-//the mapStateToProps function available to the App component as props
+/* The connect function makes the state returned from
+the mapStateToProps function available to the App component as props */
 export default connect(mapStateToProps)(App);
