@@ -1,7 +1,5 @@
 import { createStore, combineReducers } from "redux";
 
-//action creators can be used in multiple reducers
-
 const studentActionCreator = ({ name, favorite }) => ({
   type: "FILL_ME_IN",
   payload: { name, favorite }
@@ -11,12 +9,8 @@ const playListActionCreator = ({ artist, songTitle }) => ({
   //complete this action creator
 });
 
-//why do you think creating a default state is good practice?
 const defaultCurrentStudentAppState = { name: "", favorite: "" };
 
-//what do you expect to see when you log action.type?
-//how about action.payload?
-//make your predictions then uncomment the console.log to find out
 const currentStudentReducer = function(
   previousState = defaultAppState,
   action
@@ -76,11 +70,11 @@ let store = window.__store
 then dispatch your action creators in the console as an argument inside dispatch like so:
 store.dispatch({
   type: "ADD_STUDENT",
-  payload: { name: "Brittany", favorite: "Hit Me Baby One More Time" }
+  payload: { name: "Michael", favorite: "Hit Me Baby One More Time" }
 })
 
 NOT like so:
-store.dispatch(studentActionCreator({ name: "Lauren2", favorite: "Stay with Me" })
+store.dispatch(studentActionCreator({ name: "Michael", favorite: "Hit Me Baby One More Time" })
 
 */
 
@@ -90,13 +84,15 @@ console.log("This is the current State before dispatching any actions with the a
 as well as the return statement right below the case.
 call the dispatch function below. 
 Because we are not handling the action type, note that the previous state is returned.
-Uncomment the case and return statement and note the current state. */
+Now let's handle that action by uncommenting the case and return statement. Note the new current state. */
 
 store.dispatch(
-  studentActionCreator({ name: "Lauren", favorite: "Stay with Me" })
+  studentActionCreator({ name: "Lauren", favorite: "Carry On" })
   );
   
   console.log("This is the current State after dispatching the action with the action creator >>>", store.getState());
+
+
   // store.dispatch(
   //   studentActionCreator({
   //     name: "Brittany",
@@ -111,9 +107,6 @@ store.dispatch(
     //   })
     //   );
       
-      // store.dispatch();
-      // store.dispatch({ type: "CHANGE_STUDENT_NAME" });
-      // store.dispatch({ type: "CHANGE_STUDENT_FAVORITE_SONG" });
       //now try to handle that action
       //once you write (or uncomment) the case and return, we are now handling the action
       

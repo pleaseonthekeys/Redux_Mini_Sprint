@@ -5,10 +5,6 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    // console.log(">>> The state is >>> ", {
-    //   current: this.props.current,
-    //   students: this.props.students
-    // });
     return (
       <div className="App">
         <span>
