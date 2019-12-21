@@ -81,4 +81,4 @@ Continue to build out the store by dispatching at least 5 additional action crea
 
 This concludes main content for this mini sprint. Explore the /src/App.js and /src/index.js files to get a sense of how React and Redux interact with one another.
 
-Take particular note of the <Provider /> inside index.js as well as the mapStateToProps and connect functions in App.js
+Take particular note of the Provider tag inside index.js as well as the mapStateToProps and connect functions in App.js
