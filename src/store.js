@@ -10,7 +10,7 @@ const playListActionCreator = ({ artist, songTitle }) => ({
   payload: { artist, songTitle }
 });
 
-const defaultAppState = { name: "", favorite: "" };
+const defaultAppState = { name: "default state", favorite: "default state" };
 
 const currentStudentReducer = function(
   previousState = defaultAppState,

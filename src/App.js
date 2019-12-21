@@ -13,11 +13,11 @@ class App extends Component {
     return (
       <div className="App">
         <span>
-          Current student is : <b>{this.props.current.name}</b>
+          Current student is: <b>{this.props.current.name}</b>
         </span>
         <br />
         <span>
-          {this.props.current.name}'s favorite song is :
+          {this.props.current.name}'s favorite song is:
           <b>{this.props.current.favorite}</b>
         </span>
         <br />
