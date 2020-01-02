@@ -43,7 +43,7 @@ Action objects are provided to all reducers so that they can all be handled as n
 
 - [ ] Add the `studentsReducer` with property name `students` and `playListReducer` with property name `playList` to the rootReducer. Notice that the function `combineReducers` is imported from the `redux` library.
 
-The properties of the object argument inside this function directly reflect the properties maintained in your store (an object that holds the somplete state of our application). At this point, we still have not provided any data to our store or even created our actual store. We have only set up our Redux flow to provided data to the store.
+The properties of the object argument inside this function directly reflect the properties maintained in your store (an object that holds the somplete state of our application). At this point, we still have not provided any data to our store or even created our actual store. We have only set up our Redux flow to provide data to the store.
 
 ## Store
 
