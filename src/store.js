@@ -1,48 +1,54 @@
 import { createStore, combineReducers } from "redux";
 
-const studentActionCreator = ({ name, favorite }) => ({
-  type: "ADD_STUDENT",
-  payload: { name, favorite }
+const addNewMessageActionCreator = ({ userName, text }) => ({
+  type: "ADD_MESSAGE",
+  payload: { userName, text }
 });
 
-const playListActionCreator = ({ artist, songTitle }) => ({
-  type: "ADD_TO_GROUP_PLAYLIST",
-  payload: { artist, songTitle }
+// const addNewToCurrentChatActionCreator = ({ chatGroup, message }) => ({
+//   type: "ADD_TO_CURRENT_CHAT",
+//   payload: { chatGroup, message }
+// });
+
+const addUserActionCreator = ({ userName }) => ({
+  type: "ADD_USER",
+  payload: { userName }
 });
 
-const defaultAppState = { name: "default state", favorite: "default state" };
+const defaultAppState = { userName: "default state", text: "default state" };
 
-const currentStudentReducer = function(
-  previousState = defaultAppState,
-  action
-) {
+const messagesReducer = function(previousState = defaultAppState, action) {
   // console.log(">>> ACTION OF Type >>> curr " + action.type);
   // console.log(">>> ACTION's PAYLOAD IS >>> curr ", action.payload);
   switch (action.type) {
-    case "ADD_STUDENT":
-      return { name: action.payload.name, favorite: action.payload.favorite };
-    default:
-      return previousState;
-  }
-};
-
-const studentsReducer = function(previousState = { list: [] }, action) {
-  // console.log(">>> ACTION OF Type >>> stud " + action.type);
-  //console.log(">>> ACTION's PAYLOAD IS >>> stud ", action.payload);
-  switch (action.type) {
-    case "ADD_STUDENT":
+    case "ADD_MESSAGE":
       return {
-        list: [...previousState.list, action.payload],
-        total: previousState.total++
+        userName: action.payload.userName,
+        text: action.payload.text
       };
     default:
       return previousState;
   }
 };
 
-const playListReducer = function(previousState = [], action) {
+const usersReducer = function(previousState = { userList: [] }, action) {
+  // console.log(">>> ACTION OF Type >>> user " + action.type);
+  //console.log(">>> ACTION's PAYLOAD IS >>> user ", action.payload);
   switch (action.type) {
-    case "ADD_TO_GROUP_PLAYLIST":
+    case "ADD_USER":
+      return {
+        userList: [...previousState.userList, action.payload]
+      };
+    case "ADD_MESSAGE":
+      return { userList: [...previousState.userList, action.payload] };
+    default:
+      return previousState;
+  }
+};
+
+const chatRoomReducer = function(previousState = [], action) {
+  switch (action.type) {
+    case "ADD_MESSAGE":
       return [...previousState, action.payload];
     default:
       return previousState;
@@ -50,18 +56,17 @@ const playListReducer = function(previousState = [], action) {
 };
 
 const rootReducer = combineReducers({
-  current: currentStudentReducer,
-  students: studentsReducer,
-  playList: playListReducer
+  messages: messagesReducer,
+  users: usersReducer,
+  chatList: chatRoomReducer
 });
 
 const storeInitialState = {
-  current: { name: "", favorite: "" },
-  students: {
-    list: [],
-    total: 0
+  messages: { userName: "", text: "" },
+  users: {
+    userList: []
   },
-  playList: []
+  chatList: []
 };
 
 const store = createStore(rootReducer, storeInitialState);
@@ -90,30 +95,28 @@ call the dispatch function below.
 Because we are not handling the action type, note that the previous state is returned.
 Now let's handle that action by uncommenting the case and return statement. Note the new current state. */
 store.dispatch(
-  studentActionCreator({
-    name: "Lauren",
-    favorite: "You Can Get It If You Really Want"
+  addNewMessageActionCreator({
+    userName: "Lauren",
+    text: "Where should we go out to eat?"
   })
 );
 
 store.dispatch(
-  studentActionCreator({
-    name: "Trevor",
-    favorite: "I Want You Back"
+  addNewMessageActionCreator({
+    userName: "Trevor",
+    text: "Anywhere, I'm SO HUNGRY!!"
   })
 );
 
 store.dispatch(
-  playListActionCreator({
-    artist: "Jimmy Cliff",
-    songTitle: "You Can Get It If You Really Want"
+  addUserActionCreator({
+    userName: "Jimmy Cliff"
   })
 );
 
 store.dispatch(
-  playListActionCreator({
-    artist: "Jackson 5",
-    songTitle: "I Want You Back"
+  addUserActionCreator({
+    userName: "Jackson 5"
   })
 );
 
