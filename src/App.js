@@ -12,45 +12,55 @@ class App extends Component {
     // });
     const { users, messages, chatList } = this.props;
     return (
-      <div id="container" className="App">
-        <aside id="sidebar" className="sidebar">
-          <h2>User List: </h2>
-          <ul>
-            {users.userList.map(user => {
-              return (
-                <li key={uuid()}>
-                  <span>
-                    <b>{user.userName}</b>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
-        <div id="main">
-          <span>
-            You Are Signed In As: <b>{messages.userName}</b>
-          </span>
-          <br />
-          <br />
-          <div id="new-message">
-            <b>Your Message:</b> {messages.text}
+      <div>
+        <header className="head-style">
+          Welcome to Chatty Kathy{" "}
+          <img
+            id="logo"
+            src={require("./logo.png")}
+            style={{ width: 100, height: 100 }}
+            alt="logo"
+          />
+        </header>
+        <div id="container" className="App">
+          <aside id="sidebar" className="sidebar">
+            <h2>User List: </h2>
+            <ul>
+              {users.userList.map(user => {
+                return (
+                  <li key={uuid()}>
+                    <span>
+                      <b>{user.userName}</b>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </aside>
+          <div id="main">
+            <span>
+              You Are Signed In As: <b>{messages.userName}</b>
+            </span>
+            <br />
+            <br />
+            <div id="new-message">
+              <b>Your Message:</b> {messages.text}
+            </div>
+            <h2>Current Chat List: </h2>
+            <ul>
+              {chatList.map(message => {
+                return (
+                  <li key={uuid()}>
+                    <span>
+                      <b>{message.userName}:</b> {message.text}
+                    </span>
+                    <br />
+                  </li>
+                );
+              })}
+            </ul>
+            <br />
           </div>
-          <h2>Current Chat List: </h2>
-          <ul>
-            {chatList.map(message => {
-              return (
-                <li key={uuid()}>
-                  <span>
-                    <b>{message.userName}:</b> {message.text}
-                  </span>
-                  <br />
-                </li>
-              );
-            })}
-          </ul>
-
-          <br />
         </div>
       </div>
     );
