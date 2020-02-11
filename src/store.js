@@ -1,62 +1,63 @@
 import { createStore, combineReducers } from "redux";
 
-const studentActionCreator = ({ name, favorite }) => ({
+
+const addNewMessageActionCreator = ({ userName, text }) => ({
   type: "FILL_ME_IN",
-  payload: { name, favorite }
+  payload: { userName, text }
 });
 
-const playListActionCreator = ({ artist, songTitle }) => ({
+
+const addUserActionCreator = ({/*FILL ME IN*/ }) => ({
   //complete this action creator
 });
 
-const defaultCurrentStudentAppState = { name: "", favorite: "" };
+const defaultCurrentStudentAppState = { userName: "", text: "" };
 
-const currentStudentReducer = function(
+const messagesReducer = function(previousState = defaultAppState, action) {
   previousState = defaultCurrentStudentAppState,
   action
-) {
-  // console.log(">>> ACTION OF Type >>> currentStudent " + action.type);
-  // console.log(">>> ACTION's PAYLOAD IS >>> currentStudent ", action.payload);
+ 
+  // console.log(">>> ACTION OF Type >>> new message " + action.type);
+  // console.log(">>> ACTION's PAYLOAD IS >>> new message ", action.payload);
   switch (action.type) {
-    case "ADD_STUDENT":
-      return { name: action.payload.name, favorite: action.payload.favorite };
-    default:
-      return previousState;
-  }
+    case "ADD_MESSAGE":
+      return {
+        userName: action.payload.userName,
+        text: action.payload.text
+      };
 };
 
 const defaultStudentsAppState = {list: [], total: 0}
-const studentsReducer = function(previousState = defaultStudentsAppState, action) {
-  // console.log(">>> ACTION OF Type >>> students " + action.type);
-  //console.log(">>> ACTION's PAYLOAD IS >>> stududents ", action.payload);
+const usersReducer = function(previousState = { userList: [] }, action) {
+  // console.log(">>> ACTION OF Type >>> user " + action.type);
+  //console.log(">>> ACTION's PAYLOAD IS >>> user ", action.payload);
   switch (/* fill me in */) {
     case "FILL_ME_IN":
       return {
-        list: [...previousState.list, action.payload],
-        total: previousState.total++
+        userList: [...previousState.userList, action.payload],
       };
+      /* fill me in */
     default:
       return /* fill me in */;
   }
 };
 
-const playListReducer = function(previousState = [], action) {
+const chatRoomReducer = function(previousState = [], action) {
   //complete this reducer function
 };
 
 const rootReducer = combineReducers({
-  current: currentStudentReducer
+  messages: messagesReducer
   //add the rest of the reducers
 });
 
 const storeInitialState = {
-  current: { name: "", favorite: "" },
-  students: {
-    list: [],
-    total: 0
+  messages: { userName: "", text: "" },
+  users: {
+    userList: []
   },
-  playList: []
-};
+    chatList: []
+} 
 
 const store = createStore(rootReducer, storeInitialState);
 window.__store = store;
@@ -66,32 +67,53 @@ To add items to the store in the browser, write the statement below in the browe
 let store = window.__store
 then dispatch your action creators in the console as an argument inside dispatch like so:
 store.dispatch({
-  type: "ADD_STUDENT",
-  payload: { name: "Michael", favorite: "Hit Me Baby One More Time" }
+  type: "ADD_MESSAGE",
+  payload: { userName: "Lauren", text: "Where should we go out to eat?" }
 })
 
 NOT like so:
-store.dispatch(studentActionCreator({ name: "Michael", favorite: "Hit Me Baby One More Time" })
+store.dispatch(addNewMessageActionCreator({
+    userName: "Lauren",
+    text: "Where should we go out to eat?"
+)
 
 */
 
 console.log("Current State before dispatching actions with action creator >>>", store.getState());
 
-/* In currentStudentReducer, comment out the "case" after the switch statement 
+/* In messagesReducer, comment out the "case" after the switch statement 
 as well as the return statement right below the case.
 call the dispatch function below. 
 Because we are not handling the action type, note that the previous state is returned.
 Now let's handle that action by uncommenting the case and return statement. Note the new current state. */
 
-store.dispatch(
-  studentActionCreator({ name: "Lauren", favorite: "Carry On" })
-  );
-  
+// store.dispatch(
+//   addNewMessageActionCreator({
+//     userName: "Lauren",
+//     text: "Where should we go out to eat?"
+//   })
+// );
+
   console.log("Current state after dispatching action with action creator >>>", store.getState());
+
+// store.dispatch(
+//   addNewMessageActionCreator({
+//     userName: "Trevor",
+//     text: "Anywhere, I'm SO HUNGRY!!"
+//   })
+// );
+
+//  store.dispatch(
+//   addUserActionCreator({
+//   userName: "Jimmy_Cliff"
+//    })
+//  );
+
   
   
-  store.dispatch(/* dispatch more studentActionCreators */);
-  store.dispatch(/* dispatch playListActionCreators */);
+  
+  store.dispatch(/* dispatch more newMessageActionCreators */);
+  store.dispatch(/* dispatch usersActionCreators */);
   
   console.log("Current state after dispatching action with action creator >>>", store.getState());
   
