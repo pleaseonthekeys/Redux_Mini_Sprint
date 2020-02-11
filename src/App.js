@@ -39,7 +39,7 @@ class App extends Component {
           </aside>
           <div id="main">
             <span>
-              You Are Signed In As: <b>{messages.userName}</b>
+              You Are Sending Messages As: <b>{messages.userName}</b>
             </span>
             <br />
             <br />
