@@ -16,9 +16,9 @@ All of your work can be done in this file; however, it will also be useful to ex
 
 Actions are objects that must always have a `type` property and will often have a `payload` property containing data (these are just conventional names - action objects can comprise any key-value pairs, as long as other parts of the application – i.e. reducer function – are capable of handling them). Action _creators_ can be synchronous or asynchronous functions that package and deliver the data to the store. Our application will contain 2 synchronous action creators which will eventually result in 3 unique sets of data in our store.
 
-Start by filling in a type for the first provided `studentActionCreator`. Types are always strings and the naming convention is to use `"ALL_CAPS_SEPARATED_BY_UNDERSCORES"` (this is a standard naming convention to indicate constant unique values). This `type` will be used by the reducer to decide how to update that part of state.
+Start by filling in a type for the first provided `addNewMessageActionCreator`. Types are always strings and the naming convention is to use `"ALL_CAPS_SEPARATED_BY_UNDERSCORES"` (this is a standard naming convention to indicate constant unique values). This `type` will be used by the reducer to decide how to update that part of state.
 
-Write a second action creator, `playListActionCreator`, which will return an object with an `artist` and `songTitle` property.
+Write a second action creator, `addUserActionCreator`, which will return an object with a `userName` property.
 
 <!-- _Question: Why do you think creating a default state is good practice?_ -->
 
@@ -28,12 +28,14 @@ Under the hood, reducers receive the action objects delivered by action creators
 
 Action objects are provided to all reducers so that they can all be handled as needed, which is why we need a switch statement.
 
-- _What do you expect to see when you log `action.type` inside `currentStudentReducer`?_
+- _What do you expect to see when you log `action.type` inside `messagesReducer`?_
 - _How about `action.payload`?_
 
 - [ ] Make your predictions then uncomment the `console.log` statement to find out.
 
-- [ ] Write a `playListReducer` so that it returns an array containing all song objects created by the `playList` action creator.
+- [ ] Finish writing the `usersReducer` so that when `ADD_MESSAGE` action is dispatched, if a new user is writing a message, they willb be added to the user list.
+
+- [ ] Write a `chatRoomReducer` so that it returns an array containing all message objects created by the `addNewMessage` action creator.
 
 - [ ] Uncomment the `console.log` to view the `action.type` and action.payload.
 
@@ -41,7 +43,7 @@ Action objects are provided to all reducers so that they can all be handled as n
 
 ### Root Reducer
 
-- [ ] Add the `studentsReducer` with property name `students` and `playListReducer` with property name `playList` to the rootReducer. Notice that the function `combineReducers` is imported from the `redux` library.
+- [ ] Add the `messagesReducer` with property name `messages`, `usersReducer` with property name `users`, and the `chatRoomReducer` with property name `chatList` to the rootReducer. Notice that the function `combineReducers` is imported from the `redux` library.
 
 The properties of the object argument inside this function directly reflect the properties maintained in your store (an object that holds the somplete state of our application). At this point, we still have not provided any data to our store or even created our actual store. We have only set up our Redux flow to provide data to the store.
 
@@ -53,18 +55,21 @@ our root reducer and a preloaded, initial state.
 Log the statement,
 
 ```javascript
-console.log("Current State before dispatching actions with action creator >>>", store.getState());
+console.log(
+  "Current State before dispatching actions with action creator >>>",
+  store.getState()
+);
 ```
 
 Since we have not yet dispatched any action creators, what do you expect the state of our store to diplay?
 
-uncomment the function
+uncomment the following function (then individually uncomment the remaining functions)
 
 ```javascript
 store.dispatch(
-  studentActionCreator({
-    name: "Lauren",
-    favorite: "You Can Get It If You Really Want"
+  addNewMessageActionCreator({
+    userName: "Lauren",
+    text: "Where should we go out to eat?"
   })
 );
 ```
