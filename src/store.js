@@ -35,9 +35,13 @@ const usersReducer = function(previousState = { userList: [] }, action) {
         userList: [...previousState.userList, action.payload]
       };
     case "ADD_MESSAGE":
+      console.log(previousState.userList.includes(action.payload.userName));
+      console.log(action.payload.userName);
       console.log(previousState.userList);
-      return previousState.userList.includes(action.payload.userName)
-        ? null
+      return previousState.userList.some(
+        val => val.userName === action.payload.userName
+      )
+        ? { userList: [...previousState.userList] }
         : { userList: [...previousState.userList, action.payload] };
     default:
       return previousState;
@@ -92,31 +96,31 @@ as well as the return statement right below the case.
 call the dispatch function below. 
 Because we are not handling the action type, note that the previous state is returned.
 Now let's handle that action by uncommenting the case and return statement. Note the new current state. */
-// store.dispatch(
-//   addNewMessageActionCreator({
-//     userName: "Lauren",
-//     text: "Where should we go out to eat?"
-//   })
-// );
+store.dispatch(
+  addNewMessageActionCreator({
+    userName: "Lauren",
+    text: "Where should we go out to eat?"
+  })
+);
 
-// store.dispatch(
-//   addNewMessageActionCreator({
-//     userName: "Trevor",
-//     text: "Anywhere, I'm SO HUNGRY!!"
-//   })
-// );
+store.dispatch(
+  addNewMessageActionCreator({
+    userName: "Trevor",
+    text: "Anywhere, I'm SO HUNGRY!!"
+  })
+);
 
-// store.dispatch(
-//   addUserActionCreator({
-//     userName: "Jimmy_Cliff"
-//   })
-// );
+store.dispatch(
+  addUserActionCreator({
+    userName: "Jimmy_Cliff"
+  })
+);
 
-// store.dispatch(
-//   addUserActionCreator({
-//     userName: "Jackson_5"
-//   })
-// );
+store.dispatch(
+  addUserActionCreator({
+    userName: "Jackson_5"
+  })
+);
 
 console.log(
   "Current state after dispatching action with action creator >>>",
