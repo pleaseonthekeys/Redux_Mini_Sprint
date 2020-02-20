@@ -10,13 +10,10 @@ const addNewMessageActionCreator = ({ userName, text }) => ({
 const addUserActionCreator = ({/*FILL ME IN*/ }) => ({
   //complete this action creator
 });
-
 const defaultCurrentStudentAppState = { userName: "", text: "" };
 
+
 const messagesReducer = function(previousState = defaultAppState, action) {
-  previousState = defaultCurrentStudentAppState,
-  action
- 
   // console.log(">>> ACTION OF Type >>> new message " + action.type);
   // console.log(">>> ACTION's PAYLOAD IS >>> new message ", action.payload);
   switch (action.type) {
@@ -25,6 +22,9 @@ const messagesReducer = function(previousState = defaultAppState, action) {
         userName: action.payload.userName,
         text: action.payload.text
       };
+    default:
+      return previousState;
+  }
 };
 
 const defaultStudentsAppState = {list: [], total: 0}
