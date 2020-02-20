@@ -10,7 +10,8 @@ const addNewMessageActionCreator = ({ userName, text }) => ({
 const addUserActionCreator = ({/*FILL ME IN*/ }) => ({
   //complete this action creator
 });
-const defaultCurrentStudentAppState = { userName: "", text: "" };
+
+const defaultAppState = { userName: "", text: "" };
 
 
 const messagesReducer = function(previousState = defaultAppState, action) {
@@ -27,7 +28,6 @@ const messagesReducer = function(previousState = defaultAppState, action) {
   }
 };
 
-const defaultStudentsAppState = {list: [], total: 0}
 const usersReducer = function(previousState = { userList: [] }, action) {
   // console.log(">>> ACTION OF Type >>> user " + action.type);
   //console.log(">>> ACTION's PAYLOAD IS >>> user ", action.payload);
@@ -75,7 +75,8 @@ NOT like so:
 store.dispatch(addNewMessageActionCreator({
     userName: "Lauren",
     text: "Where should we go out to eat?"
-)
+  })
+); 
 
 */
 

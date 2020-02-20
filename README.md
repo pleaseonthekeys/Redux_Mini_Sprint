@@ -31,7 +31,7 @@ Action objects are provided to all reducers so that they can all be handled as n
 - _What do you expect to see when you log `action.type` inside `messagesReducer`?_
 - _How about `action.payload`?_
 
-- [ ] Make your predictions then uncomment the `console.log` statement to find out.
+- [ ] Make your predictions then uncomment the `console.log` statement to find out. If errors prevent you from viewing the logs, comment out the in complete reducers first.
 
 - [ ] Finish writing the `usersReducer` so that when `ADD_MESSAGE` action is dispatched, if a new user is writing a message, they willb be added to the user list.
 
@@ -56,7 +56,7 @@ Log the statement,
 
 ```javascript
 console.log(
-  "Current State before dispatching actions with action creator >>>",
+  'Current State before dispatching actions with action creator >>>',
   store.getState()
 );
 ```
@@ -68,8 +68,8 @@ uncomment the following function (then individually uncomment the remaining func
 ```javascript
 store.dispatch(
   addNewMessageActionCreator({
-    userName: "Lauren",
-    text: "Where should we go out to eat?"
+    userName: 'Lauren',
+    text: 'Where should we go out to eat?'
   })
 );
 ```
